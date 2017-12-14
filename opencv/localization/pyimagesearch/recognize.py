@@ -8,11 +8,11 @@ import imutils
 import numpy as np
 from imutils import paths
 
-from license_plate import LicensePlateDetector
+from opencv.localization.pyimagesearch.license_plate import LicensePlateDetector
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--images", required=True, help="path to the images to be classified")
+ap.add_argument("-i", "--images", required=False, help="path to the images to be classified", default='images/')
 args = vars(ap.parse_args())
 
 # loop over the images

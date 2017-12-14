@@ -4,8 +4,6 @@ bleach==1.5.0
 certifi==2017.7.27.1
 chardet==3.0.4
 cycler==0.10.0
-cymem==1.31.2
-cytoolz==0.8.2
 decorator==4.1.2
 dill==0.2.7.1
 entrypoints==0.2.3
@@ -29,7 +27,6 @@ Markdown==2.6.9
 MarkupSafe==1.0
 matplotlib==2.1.0
 mistune==0.7.4
-murmurhash==0.26.4
 nbconvert==5.3.1
 nbformat==4.4.0
 networkx==2.0
@@ -45,12 +42,10 @@ pexpect==4.2.1
 pickleshare==0.7.4
 Pillow==4.3.0
 plac==0.9.6
-preshed==1.0.0
 prompt-toolkit==1.0.15
 protobuf==3.4.0
 ptyprocess==0.5.2
 py4j==0.10.4
-pycharm===debug
 Pygments==2.2.0
 pyparsing==2.2.0
 pyspark==2.2.0

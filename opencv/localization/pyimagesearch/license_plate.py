@@ -77,10 +77,10 @@ class LicensePlateDetector:
         thresh = cv2.erode(thresh, None, iterations=1)
 
         # find contours in the thresholded image
-        cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        image, contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         # loop over the contours
-        for c in cnts:
+        for c in contours:
             # grab the bounding box associated with the contour and compute the area and
             # aspect ratio
             (w, h) = cv2.boundingRect(c)[2:]
@@ -106,7 +106,7 @@ class LicensePlateDetector:
         # extract the Value component from the HSV color space and apply adaptive thresholding
         # to reveal the characters on the license plate
         V = cv2.split(cv2.cvtColor(plate, cv2.COLOR_BGR2HSV))[2]
-        thresh = threshold_adaptive(V, 30, offset=15).astype("uint8") * 255
+        thresh = threshold_adaptive(V, 29, offset=15).astype("uint8") * 255
         thresh = cv2.bitwise_not(thresh)
 
         # resize the license plate region to a canonical size
@@ -129,13 +129,13 @@ class LicensePlateDetector:
             # current label, then find contours in the label mask
             labelMask = np.zeros(thresh.shape, dtype="uint8")
             labelMask[labels == label] = 255
-            (cnts, _) = cv2.findContours(labelMask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            image, contours, hierarchy = cv2.findContours(labelMask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
             # ensure at least one contour was found in the mask
-            if len(cnts) > 0:
+            if len(contours) > 0:
                 # grab the largest contour which corresponds to the component in the mask, then
                 # grab the bounding box for the contour
-                c = max(cnts, key=cv2.contourArea)
+                c = max(contours, key=cv2.contourArea)
                 (boxX, boxY, boxW, boxH) = cv2.boundingRect(c)
 
                 # compute the aspect ratio, solidity, and height ratio for the component
