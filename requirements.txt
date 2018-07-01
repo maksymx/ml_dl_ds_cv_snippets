@@ -98,3 +98,4 @@ webencodings==0.5.1
 Werkzeug==0.14.1
 widgetsnbextension==3.0.3
 wrapt==1.10.11
+sparkflow
